@@ -57,3 +57,10 @@ a { @apply transition-colors duration-200; }
 
 
 .skill-tile:hover { @apply scale-[1.06] shadow-xl; }
+
+/* nav links */
+.nav-link { @apply subtle text-sm hover:text-brand transition-colors; }
+.nav-link--active { @apply text-brand font-semibold; }
+.nav-link--active::after {
+  content:""; @apply block h-[2px] w-full bg-brand rounded-full mt-1;
+}
