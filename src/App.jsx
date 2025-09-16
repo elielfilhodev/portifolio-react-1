@@ -4,6 +4,7 @@ import Home from "./sections/Home";
 import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Contact from "./sections/Contact";
+import BackToTop from "./components/BackToTop";
 
 export default function App() {
   useEffect(() => {
@@ -22,9 +23,10 @@ export default function App() {
         <Skills />
         <Contact />
       </main>
-      <footer className="py-8 text-center subtle">
+<footer className="py-8 text-center subtle">
         <p>© {new Date().getFullYear()} Eliel • Construído com React + Vite</p>
       </footer>
+      <BackToTop />
     </>
   );
 }

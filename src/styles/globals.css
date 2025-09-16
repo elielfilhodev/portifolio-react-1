@@ -52,3 +52,8 @@ a:hover {
 
 a { @apply transition-colors duration-200; }
 .section-title { @apply transition-colors duration-200; }
+
+a { @apply transition-colors duration-200; }
+
+
+.skill-tile:hover { @apply scale-[1.06] shadow-xl; }
