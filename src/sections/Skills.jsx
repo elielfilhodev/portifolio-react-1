@@ -1,16 +1,15 @@
 // src/sections/Skills.jsx
 import Section from "../components/Section";
 import {
-  // Front-end
   SiReact, SiTailwindcss, SiSass, SiBootstrap, SiJavascript,
-  // Back-end
-  FaJava,
-  SiSpringboot,
-  // Databases
-  SiMongodb, SiMysql, SiMicrosoftsqlserver,
-  // Ferramentas
-  SiGit, SiGithub, SiVisualstudiocode, SiVisualstudio, SiNodedotjs,
+  SiSpringboot, SiMongodb, SiMysql,
+  SiGit, SiGithub, SiNodedotjs,
 } from "react-icons/si";
+import { FaJava, FaDatabase, FaTools } from "react-icons/fa";
+import { TbBrandVscode } from "react-icons/tb"; // VS Code
+
+
+
 import { motion } from "framer-motion";
 
 const groups = [
@@ -36,7 +35,7 @@ const groups = [
     items: [
       { label: "MongoDB", Icon: SiMongodb, color: "#47A248" },
       { label: "MySQL", Icon: SiMysql, color: "#4479A1" },
-      { label: "SQL Server", Icon: SiMicrosoftsqlserver, color: "#CC2927" },
+      { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },
     ],
   },
   {
@@ -44,8 +43,8 @@ const groups = [
     items: [
       { label: "Git", Icon: SiGit, color: "#F05032" },
       { label: "GitHub", Icon: SiGithub, color: "#181717" },
-      { label: "VS Code", Icon: SiVisualstudiocode, color: "#007ACC" },
-      { label: "Visual Studio", Icon: SiVisualstudio, color: "#5C2D91" },
+      { label: "VS Code", Icon: TbBrandVscode,    color: "#007ACC" },
+      { label: "Visual Studio", Icon: FaTools, color: "#5C2D91" },
       { label: "Node.js", Icon: SiNodedotjs, color: "#339933" },
     ],
   },
