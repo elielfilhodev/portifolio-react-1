@@ -1,83 +1,117 @@
 // src/sections/Skills.jsx
 import Section from "../components/Section";
-import {
-  SiReact, SiTailwindcss, SiSass, SiBootstrap, SiJavascript,
-  SiSpringboot, SiMongodb, SiMysql,
-  SiGit, SiGithub, SiNodedotjs,
-} from "react-icons/si";
-import { FaJava, FaDatabase, FaTools } from "react-icons/fa";
-import { TbBrandVscode } from "react-icons/tb"; // VS Code
-
-
-
+import ProgressBar from "../components/ProgressBar";
 import { motion } from "framer-motion";
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiPython,
+  SiDotnet,
+  SiReact,
+  SiTailwindcss,
+  SiSass,
+  SiBootstrap,
+  SiSpringboot,
+  SiNodedotjs,
+} from "react-icons/si";
+import { FaJava, FaDatabase } from "react-icons/fa";// DB genérico p/ SQL Server
 
-const groups = [
-  {
-    title: "Front-end",
-    items: [
-      { label: "React", Icon: SiReact, color: "#61DAFB" },
-      { label: "Tailwind", Icon: SiTailwindcss, color: "#38BDF8" },
-      { label: "Sass", Icon: SiSass, color: "#CC6699" },
-      { label: "Bootstrap", Icon: SiBootstrap, color: "#7952B3" },
-      { label: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
-    ],
-  },
-  {
-    title: "Back-end",
-    items: [
-      { label: "Java", Icon: FaJava, color: "#EA2D2E" },
-      { label: "Spring Boot", Icon: SiSpringboot, color: "#6DB33F" },
-    ],
-  },
-  {
-    title: "Bancos de dados",
-    items: [
-      { label: "MongoDB", Icon: SiMongodb, color: "#47A248" },
-      { label: "MySQL", Icon: SiMysql, color: "#4479A1" },
-      { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },
-    ],
-  },
-  {
-    title: "Ferramentas",
-    items: [
-      { label: "Git", Icon: SiGit, color: "#F05032" },
-      { label: "GitHub", Icon: SiGithub, color: "#181717" },
-      { label: "VS Code", Icon: TbBrandVscode, color: "#007ACC" },
-      { label: "Visual Studio", Icon: FaTools, color: "#5C2D91" },
-      { label: "Node.js", Icon: SiNodedotjs, color: "#339933" },
-    ],
-  },
+// Ajuste os percentuais conforme sua autoavaliação
+const languages = [
+  { label: "HTML", percent: 92, color: "#E34F26", Icon: SiHtml5 },
+  { label: "CSS", percent: 88, color: "#1572B6", Icon: SiCss3 },
+  { label: "JavaScript", percent: 85, color: "#F7DF1E", Icon: SiJavascript },
+  { label: "C#", percent: 60, color: "#512BD4", Icon: SiDotnet },
+  { label: "Python", percent: 55, color: "#3776AB", Icon: SiPython },
+  { label: "Java", percent: 80, color: "#EA2D2E", Icon: FaJava },
 ];
+
+const frontendStack = [
+  { label: "React", Icon: SiReact, color: "#61DAFB" },
+  { label: "Tailwind", Icon: SiTailwindcss, color: "#38BDF8" },
+  { label: "Sass", Icon: SiSass, color: "#CC6699" },
+  { label: "Bootstrap", Icon: SiBootstrap, color: "#7952B3" },
+];
+
+const backendStack = [
+  { label: "Node.js", Icon: SiNodedotjs, color: "#339933" },
+  { label: "Spring Boot", Icon: SiSpringboot, color: "#6DB33F" },
+  { label: "SQL Server", Icon: FaDatabase, color: "#CC2927" },
+];
+
+// Agregados (ajuste os números às suas entregas)
+const FRONTEND_TOTAL = 85; // %
+const BACKEND_TOTAL = 78; // %
 
 export default function Skills() {
   return (
     <Section id="habilidades" title="Habilidades">
-      <div className="grid md:grid-cols-2 gap-6">
-        {groups.map((g) => (
-          <div key={g.title} className="card p-6">
-            <h3 className="text-xl font-semibold mb-4">{g.title}</h3>
-            <div className="grid grid-cols-4 xs:grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-3 sm:gap-4">
-              {g.items.map(({ label, Icon, color }) => (
-                <motion.button
-                  key={label}
-                  title={label}
-                  className="group aspect-square rounded-xl flex items-center justify-center
-                 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20
-                 transition-colors"
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.35 }}
-                >
-                  <Icon className="skill-icon w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300 group-hover:scale-110"
-                    style={{ color }} aria-hidden />
-                </motion.button>
-              ))}
-            </div>
+      <div className="grid lg:grid-cols-2 gap-6">
+        {/* Linguagens com barras individuais */}
+        <motion.div
+          className="card p-6"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 className="text-xl font-semibold mb-4">Linguagens</h3>
+          {languages.map(({ label, percent, color, Icon }) => (
+            <ProgressBar
+              key={label}
+              label={label}
+              percent={percent}
+              color={color}
+              Icon={Icon}
+            />
+          ))}
+        </motion.div>
 
+        {/* Badges da stack (grid de ícones) + agregados */}
+        <motion.div
+          className="card p-6"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
+        >
+          <h3 className="text-xl font-semibold mb-4">Stack</h3>
+
+          {/* Front-end icons */}
+          <div className="mb-2 subtle text-sm">Front-end</div>
+          <div className="grid grid-cols-5 sm:grid-cols-6 gap-3 mb-5">
+            {frontendStack.map(({ label, Icon, color }) => (
+              <div
+                key={label}
+                title={label}
+                className="aspect-square rounded-xl flex items-center justify-center
+                           bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20
+                           transition-colors"
+              >
+                <Icon className="w-7 h-7 sm:w-8 sm:h-8" style={{ color }} aria-hidden />
+              </div>
+            ))}
           </div>
-        ))}
+          <ProgressBar label="Front-end" percent={FRONTEND_TOTAL} color="#1f6feb" />
+
+          {/* Back-end icons */}
+          <div className="mt-6 mb-2 subtle text-sm">Back-end</div>
+          <div className="grid grid-cols-5 sm:grid-cols-6 gap-3 mb-5">
+            {backendStack.map(({ label, Icon, color }) => (
+              <div
+                key={label}
+                title={label}
+                className="aspect-square rounded-xl flex items-center justify-center
+                           bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20
+                           transition-colors"
+              >
+                <Icon className="w-7 h-7 sm:w-8 sm:h-8" style={{ color }} aria-hidden />
+              </div>
+            ))}
+          </div>
+          <ProgressBar label="Back-end" percent={BACKEND_TOTAL} color="#16a34a" />
+        </motion.div>
       </div>
     </Section>
   );
