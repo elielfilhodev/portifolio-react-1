@@ -155,3 +155,8 @@ a {
 .section {
   scroll-margin-top: 72px;
 }
+
+.h1-clamp {
+  font-size: clamp(1.6rem, 4.5vw + 1rem, 3rem);
+  line-height: 1.15;
+}

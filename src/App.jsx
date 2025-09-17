@@ -5,6 +5,8 @@ import About from "./sections/About";
 import Skills from "./sections/Skills";
 import Contact from "./sections/Contact";
 import BackToTop from "./components/BackToTop";
+import ParticlesBG from "./components/ParticlesBG";
+
 
 export default function App() {
   useEffect(() => {
@@ -17,13 +19,14 @@ export default function App() {
   return (
     <>
       <Navbar />
+      <ParticlesBG count={70} speed={0.3} connect={false} />
       <main>
         <Home />
         <About />
         <Skills />
         <Contact />
       </main>
-<footer className="py-8 text-center subtle">
+      <footer className="py-8 text-center subtle">
         <p>© {new Date().getFullYear()} Eliel • Construído com React + Vite</p>
       </footer>
       <BackToTop />

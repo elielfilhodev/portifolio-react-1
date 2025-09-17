@@ -43,7 +43,7 @@ const groups = [
     items: [
       { label: "Git", Icon: SiGit, color: "#F05032" },
       { label: "GitHub", Icon: SiGithub, color: "#181717" },
-      { label: "VS Code", Icon: TbBrandVscode,    color: "#007ACC" },
+      { label: "VS Code", Icon: TbBrandVscode, color: "#007ACC" },
       { label: "Visual Studio", Icon: FaTools, color: "#5C2D91" },
       { label: "Node.js", Icon: SiNodedotjs, color: "#339933" },
     ],
@@ -57,25 +57,25 @@ export default function Skills() {
         {groups.map((g) => (
           <div key={g.title} className="card p-6">
             <h3 className="text-xl font-semibold mb-4">{g.title}</h3>
-            <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-4">
+            <div className="grid grid-cols-4 xs:grid-cols-5 sm:grid-cols-6 md:grid-cols-7 gap-3 sm:gap-4">
               {g.items.map(({ label, Icon, color }) => (
                 <motion.button
                   key={label}
                   title={label}
-                  className="group aspect-square rounded-2xl flex items-center justify-center bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors"
+                  className="group aspect-square rounded-xl flex items-center justify-center
+                 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20
+                 transition-colors"
                   initial={{ opacity: 0, y: 8 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <Icon
-                    className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-300 group-hover:scale-110"
-                    style={{ color }}
-                    aria-hidden
-                  />
+                  <Icon className="skill-icon w-8 h-8 sm:w-9 sm:h-9 transition-transform duration-300 group-hover:scale-110"
+                    style={{ color }} aria-hidden />
                 </motion.button>
               ))}
             </div>
+
           </div>
         ))}
       </div>
