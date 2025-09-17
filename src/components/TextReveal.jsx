@@ -7,7 +7,7 @@ export default function TextReveal({
   as: Tag = "p",          // h1, h2, p...
   className = "",
   delay = 0,              // atraso do container
-  duration = 0.6,         // duração de cada item
+  duration = 0.8,         // duração de cada item
   stagger = 0.04,         // intervalo entre itens
 }) {
   const parts = by === "char"

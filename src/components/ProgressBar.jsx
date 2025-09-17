@@ -23,7 +23,7 @@ export default function ProgressBar({
                     initial={{ width: 0 }}
                     whileInView={{ width: `${Math.max(0, Math.min(100, percent))}%` }}
                     viewport={{ once: true, amount: 0.4 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
                     style={{ background: color }}
                     aria-hidden
                 />

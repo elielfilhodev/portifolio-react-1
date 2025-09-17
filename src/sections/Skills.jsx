@@ -21,10 +21,10 @@ import { FaJava, FaDatabase } from "react-icons/fa";// DB genérico p/ SQL Serve
 const languages = [
   { label: "HTML", percent: 92, color: "#E34F26", Icon: SiHtml5 },
   { label: "CSS", percent: 88, color: "#1572B6", Icon: SiCss3 },
-  { label: "JavaScript", percent: 85, color: "#F7DF1E", Icon: SiJavascript },
-  { label: "C#", percent: 60, color: "#512BD4", Icon: SiDotnet },
-  { label: "Python", percent: 55, color: "#3776AB", Icon: SiPython },
-  { label: "Java", percent: 80, color: "#EA2D2E", Icon: FaJava },
+  { label: "JavaScript", percent: 80, color: "#F7DF1E", Icon: SiJavascript },
+  { label: "C#", percent: 20, color: "#512BD4", Icon: SiDotnet },
+  { label: "Python", percent: 40, color: "#3776AB", Icon: SiPython },
+  { label: "Java", percent: 20, color: "#EA2D2E", Icon: FaJava },
 ];
 
 const frontendStack = [
@@ -42,7 +42,7 @@ const backendStack = [
 
 // Agregados (ajuste os números às suas entregas)
 const FRONTEND_TOTAL = 85; // %
-const BACKEND_TOTAL = 78; // %
+const BACKEND_TOTAL = 60; // %
 
 export default function Skills() {
   return (
@@ -54,7 +54,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.12 }}
         >
           <h3 className="text-xl font-semibold mb-4">Linguagens</h3>
           {languages.map(({ label, percent, color, Icon }) => (
@@ -74,7 +74,7 @@ export default function Skills() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
+          transition={{ duration: 0.10, delay: 0.12 }}
         >
           <h3 className="text-xl font-semibold mb-4">Stack</h3>
 

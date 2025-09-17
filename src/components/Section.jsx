@@ -18,7 +18,7 @@ export default function Section({ id, title, children }) {
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
+          transition={{ duration: 0.5, ease: "easeInOut", delay: 0.08 }}
         >
           {children}
         </motion.div>
