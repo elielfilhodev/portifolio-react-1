@@ -10,25 +10,38 @@ export default function Contact() {
 
   const onSubmit = async (data) => {
     setStatus(null);
-    // honeypot simples
+
+    // honeypot contra bots
     if (data.website) return;
+
+    const pub = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const svc = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const tpl = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
+    // validação defensiva das ENV
+    if (!pub || !svc || !tpl) {
+      console.error("EmailJS ENV missing", { pub, svc, tpl });
+      setStatus({ ok: false, msg: "Configuração ausente. Revise .env.local e reinicie o servidor." });
+      return;
+    }
 
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        svc,
+        tpl,
         {
           from_name: data.name,
           from_email: data.email,
           message: data.message,
           reply_to: data.email,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        pub // se você inicializar no main.jsx, pode remover este 4º parâmetro
       );
-      setStatus({ ok: true, msg: "Mensagem enviada com sucesso. Retorno em breve." });
+
+      setStatus({ ok: true, msg: "Mensagem enviada. Retorno em breve." });
       reset();
     } catch (err) {
-      console.error(err);
+      console.error("EmailJS error", err);
       setStatus({ ok: false, msg: "Falha ao enviar. Tente novamente em instantes." });
     }
   };
@@ -72,27 +85,15 @@ export default function Contact() {
             {errors.message && <span className="text-red-500 text-xs">{errors.message.message}</span>}
           </label>
 
-          {/* Honeypot */}
-          <input
-            type="text"
-            tabIndex={-1}
-            autoComplete="off"
-            {...register("website")}
-            className="hidden"
-          />
+          {/* honeypot */}
+          <input type="text" tabIndex={-1} autoComplete="off" {...register("website")} className="hidden" />
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn-primary w-full justify-center"
-          >
+          <button type="submit" disabled={isSubmitting} className="btn-primary w-full justify-center">
             {isSubmitting ? "Enviando..." : "Enviar mensagem"}
           </button>
 
           {status && (
-            <div className={`text-sm ${status.ok ? "text-green-500" : "text-red-500"}`}>
-              {status.msg}
-            </div>
+            <div className={`text-sm ${status.ok ? "text-green-500" : "text-red-500"}`}>{status.msg}</div>
           )}
         </div>
       </form>
