@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60 border-b border-black/5 dark:border-white/10">
+    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60 border-b border-black/5 dark:border-white/10">
       <div className="container max-w-6xl flex items-center justify-between h-16">
         <a href="#home" className="font-semibold tracking-tight" onClick={(e)=>scrollTo(e,"#home")}>Eliel.dev</a>
 

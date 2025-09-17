@@ -20,7 +20,7 @@ export default function App() {
     <>
       <Navbar />
       <ParticlesBG count={70} speed={0.3} connect={false} />
-      <main>
+      <main className="has-fixed-header">
         <Home />
         <About />
         <Skills />

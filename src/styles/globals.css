@@ -8,8 +8,9 @@
 
 html,
 body,
-#root {
-  @apply overflow-x-hidden;
+:root { --header-h: 64px; }
+.has-fixed-header {
+  padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
 }
 
 img,
