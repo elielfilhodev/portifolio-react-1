@@ -1,7 +1,7 @@
 export const projects = [
     {
         id: "proj-01",
-        title: "Dashboard Bancário (React + Tailwind)",
+        title: "CRUD de Cadastro de Cliente — Spring Boot (Java) + Angular",
         type: "video",
         src: "/media/dashboard-demo.mp4",
         description: "SPA com gráficos e autenticação simulada.",
@@ -22,11 +22,11 @@ export const projects = [
     {
         id: "proj-03",
         title: "Dashboard Bancário (React + Tailwind)",
-        type: "video",
-        src: "/media/dashboard-demo.mp4",
+        type: "image",
+        src: "/media/dashboard.png",
         description: "SPA com gráficos e autenticação simulada.",
         tags: ["React", "Tailwind", "Vite"],
-        demo: "https://seu-demo.com/dashboard",
-        code: "https://github.com/seuuser/dashboard-bancario",
+        demo: "https://banco-dashboard.vercel.app/",
+        code: "https://github.com/elielfilhodev2/banco-dashboard",
     },
 ]
