@@ -20,6 +20,15 @@ export default function Home() {
           by="word"
         />
         <Carousel items={projects} />
+        <div className="mt-5 flex items-center justify-center gap-3">
+  <a href="/cv/Eliel-CV.pdf" download className="btn-primary">
+    Download CV
+  </a>
+  <a href="#contato" className="btn-ghost">
+    Fale comigo
+  </a>
+</div>
+
       </div>
     </section>
 

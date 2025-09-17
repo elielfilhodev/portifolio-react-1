@@ -45,6 +45,10 @@ return (
     Eliel.dev
   </a>
   <SocialLinks className="hidden sm:flex" size={18} />
+  <a href="/cv/Eliel-CV.pdf" download className="btn-ghost hidden sm:inline-flex">
+  Download CV
+</a>
+
 </div>
 
       {/* Desktop */}

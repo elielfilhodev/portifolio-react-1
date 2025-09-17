@@ -4,10 +4,8 @@ export const projects = [
         title: "CRUD de Cadastro de Cliente — Spring Boot (Java) + Angular",
         type: "video",
         src: "/media/video.mp4",
-        description: "CRUD simples, demontrativo de cadastro de clientes.",
+        description: "CRUD simples, demontrativo de cadastro de clientes, utilizando java + spring boot para simular um banco de dados.",
         tags: ["React", "Tailwind", "Vite"],
-        demo: "https://seu-demo.com/dashboard",
-        code: "https://github.com/seuuser/dashboard-bancario",
     },
     {
         id: "proj-02",
