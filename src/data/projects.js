@@ -12,7 +12,7 @@ export const projects = [
         title: "Portal de Notícias (Vue + Tailwind)",
         type: "image",
         src: "/media/portal.png",
-        description: "POrtal de notícias demonstrativo.",
+        description: "Portal de notícias demonstrativo.",
         tags: ["Vue", "Tailwind", "Vite"],
         demo: "https://portal-noticias-vue.vercel.app",
         code: "https://github.com/elielfilhodev2/portal-noticias-vue",
