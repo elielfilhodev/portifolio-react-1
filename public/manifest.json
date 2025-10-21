@@ -1,6 +1,6 @@
 {
   "short_name": "Eliel Filho",
-  "name": "Eliel Filho - Desenvolvedor Fullstack e Técnico em TI",
+  "name": "Eliel Filho - Desenvolvedor Full Stack",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#6366f1",
   "background_color": "#ffffff"
 }

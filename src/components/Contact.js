@@ -1,12 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaLinkedin, FaGithub, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
-import styles from './Contact.module.css';
+import { 
+  FaEnvelope, 
+  FaPhone, 
+  FaMapMarkerAlt, 
+  FaLinkedin, 
+  FaGithub, 
+  FaTwitter,
+  FaPaperPlane,
+  FaCheckCircle,
+  FaExclamationCircle
+} from 'react-icons/fa';
+import './Contact.css';
 
-const Contact = ({ onSectionChange }) => {
-  const contactRef = useRef(null);
-  const formRef = useRef(null);
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,248 +21,263 @@ const Contact = ({ onSectionChange }) => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [messageStatus, setMessageStatus] = useState(null);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  // Configurações do EmailJS - SUBSTITUA PELOS SEUS IDs
-  const EMAILJS_SERVICE_ID = 'service_i3vdg3r'; // Substitua pelo seu Service ID
-  const EMAILJS_TEMPLATE_ID = 'template_on95xy8'; // Substitua pelo seu Template ID
-  const EMAILJS_PUBLIC_KEY = 'gHuIYaAydLbw3EKiA'; // Substitua pela sua Public Key
+  const contactInfo = [
+    {
+      icon: FaEnvelope,
+      title: 'Email',
+      value: 'elielfilhodev@hotmail.com',
+      link: 'mailto:elielfilhodev@hotmail.com'
+    },
+    {
+      icon: FaPhone,
+      title: 'Telefone',
+      value: '+55 (14) 999061535',
+      link: 'tel:+5514999061535'
+    },
+    {
+      icon: FaMapMarkerAlt,
+      title: 'Localização',
+      value: 'Taquarituba, SP - Brasil',
+      link: null
+    }
+  ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const contactElement = contactRef.current;
-      if (contactElement) {
-        const rect = contactElement.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          onSectionChange('contact');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [onSectionChange]);
+  const socialLinks = [
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/eliel-filho-8083a3359/', label: 'LinkedIn' },
+    { icon: FaGithub, href: 'https://github.com/elielfilhodev', label: 'GitHub' },
+    { icon: FaTwitter, href: 'https://x.com/elielfilho_dev', label: 'Twitter' }
+  ];
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setMessageStatus(null);
+    setSubmitStatus(null);
 
+    // Simular envio do formulário
     try {
-      const result = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formData,
-        EMAILJS_PUBLIC_KEY
-      );
-
-      if (result.status === 200) {
-        setMessageStatus({
-          type: 'success',
-          message: 'Mensagem enviada com sucesso! Entrarei em contato em breve.'
-        });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
-      console.error('Erro ao enviar email:', error);
-      setMessageStatus({
-        type: 'error',
-        message: 'Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente.'
-      });
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <section id="contact" ref={contactRef} className={styles.contactSection}>
-      <div className={styles.container}>
+    <section id="contact" className="contact section">
+      <div className="container">
         <motion.div
-          className={styles.sectionHeader}
-          initial={{ opacity: 0, y: 50 }}
+          className="section-header"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className={styles.sectionTitle}>Vamos Conversar</h2>
-          <p className={styles.sectionSubtitle}>
-            Pronto para transformar suas ideias em realidade? Entre em contato!
+          <h2 className="section-title">Contato</h2>
+          <p className="section-subtitle">
+            Vamos trabalhar juntos! Entre em contato comigo para discutir seu próximo projeto
           </p>
         </motion.div>
 
-        <div className={styles.contactContent}>
+        <div className="contact-content">
           <motion.div
-            className={styles.contactInfo}
+            className="contact-info"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>Entre em Contato</h3>
-            <p>
-              Estou sempre aberto a novos projetos e desafios. Se você tem uma ideia 
-              ou precisa de serviços de desenvolvimento ou TI, não hesite em me contatar. 
-              Vamos conversar sobre como posso ajudar você!
-            </p>
+            <motion.h3
+              className="contact-info-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Vamos conversar!
+            </motion.h3>
 
-            <div className={styles.contactMethods}>
-              <div className={styles.contactMethod}>
-                <FaWhatsapp className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>WhatsApp</h4>
-                  <a href="https://wa.me/5514999061535" target="_blank" rel="noopener noreferrer">
-                    +55 14 99906-1535
-                  </a>
-                </div>
-              </div>
+            <motion.p
+              className="contact-info-description"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Estou sempre interessado em novos projetos e oportunidades. 
+              Se você tem uma ideia ou precisa de ajuda com desenvolvimento, 
+              não hesite em entrar em contato!
+            </motion.p>
 
-              <div className={styles.contactMethod}>
-                <FaEnvelope className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>Email</h4>
-                  <a href="mailto:elielfilhodev@hotmail.com">
-                    elielfilhodev@hotmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className={styles.contactMethod}>
-                <FaMapMarkerAlt className={styles.icon} />
-                <div className={styles.content}>
-                  <h4>Localização</h4>
-                  <span>Taquarituba, SP - Brasil</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.socialLinks}>
-              <h4>Redes Sociais</h4>
-              <div className={styles.socialGrid}>
-                <a
-                  href="https://github.com/elielfilhodev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
+            <motion.div
+              className="contact-info-list"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  className="contact-info-item"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
                 >
-                  <FaGithub />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/eliel-filho-8083a3359"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  <FaLinkedin />
-                </a>
-                <a
-                  href="https://wa.me/5514999061535"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.socialLink}
-                >
-                  <FaWhatsapp />
-                </a>
+                  <div className="contact-info-icon">
+                    <info.icon />
+                  </div>
+                  <div className="contact-info-content">
+                    <h4 className="contact-info-label">{info.title}</h4>
+                    {info.link ? (
+                      <a href={info.link} className="contact-info-value">
+                        {info.value}
+                      </a>
+                    ) : (
+                      <span className="contact-info-value">{info.value}</span>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="contact-social"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <h4 className="social-title">Siga-me nas redes sociais</h4>
+              <div className="social-links">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-link"
+                    whileHover={{ scale: 1.2, y: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label={social.label}
+                  >
+                    <social.icon />
+                  </motion.a>
+                ))}
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           <motion.div
-            className={styles.contactForm}
+            className="contact-form-container"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>Envie uma Mensagem</h3>
-            <form ref={formRef} onSubmit={handleSubmit}>
-              <div className={styles.formGroup}>
-                <label htmlFor="name">Nome *</label>
+            <form className="contact-form" onSubmit={handleSubmit}>
+              <motion.h3
+                className="form-title"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                Envie uma mensagem
+              </motion.h3>
+
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">Nome</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Seu nome completo"
                   value={formData.name}
                   onChange={handleInputChange}
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email *</label>
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="seu@email.com"
                   value={formData.email}
                   onChange={handleInputChange}
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="subject">Assunto *</label>
+              <div className="form-group">
+                <label htmlFor="subject" className="form-label">Assunto</label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  placeholder="Qual é o assunto?"
                   value={formData.subject}
                   onChange={handleInputChange}
+                  className="form-input"
                   required
                 />
               </div>
 
-              <div className={styles.formGroup}>
-                <label htmlFor="message">Mensagem *</label>
+              <div className="form-group">
+                <label htmlFor="message" className="form-label">Mensagem</label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Conte-me sobre seu projeto ou dúvida..."
                   value={formData.message}
                   onChange={handleInputChange}
+                  className="form-textarea"
+                  rows="5"
                   required
                 />
               </div>
 
-              {messageStatus && (
-                <motion.div
-                  className={`${styles.messageStatus} ${styles[messageStatus.type]}`}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {messageStatus.type === 'success' ? (
-                    <FaCheckCircle className={styles.statusIcon} />
-                  ) : (
-                    <FaExclamationCircle className={styles.statusIcon} />
-                  )}
-                  <span>{messageStatus.message}</span>
-                </motion.div>
-              )}
-
               <motion.button
                 type="submit"
-                className={styles.submitButton}
+                className="form-submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {isSubmitting ? (
                   <>
-                    <motion.div
-                      className={styles.loadingSpinner}
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    />
+                    <div className="spinner" />
                     Enviando...
                   </>
                 ) : (
@@ -265,6 +287,26 @@ const Contact = ({ onSectionChange }) => {
                   </>
                 )}
               </motion.button>
+
+              {submitStatus && (
+                <motion.div
+                  className={`submit-status ${submitStatus}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  {submitStatus === 'success' ? (
+                    <>
+                      <FaCheckCircle />
+                      Mensagem enviada com sucesso!
+                    </>
+                  ) : (
+                    <>
+                      <FaExclamationCircle />
+                      Erro ao enviar mensagem. Tente novamente.
+                    </>
+                  )}
+                </motion.div>
+              )}
             </form>
           </motion.div>
         </div>

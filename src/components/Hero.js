@@ -1,231 +1,215 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaServer, FaWrench, FaArrowDown, FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
-import styles from './Hero.module.css';
+import { FaGithub, FaLinkedin, FaTwitter, FaDownload, FaRocket } from 'react-icons/fa';
+import { HiCode, HiLightBulb } from 'react-icons/hi';
+import './Hero.css';
 
-const Hero = ({ onSectionChange }) => {
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const heroElement = heroRef.current;
-      if (heroElement) {
-        const rect = heroElement.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          onSectionChange('hero');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [onSectionChange]);
-
-  const handleScrollDown = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+const Hero = () => {
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const socialLinks = [
+    { icon: FaGithub, href: 'https://github.com/elielfilhodev', label: 'GitHub' },
+    { icon: FaLinkedin, href: 'https://linkedin.com/in/eliel-filho-8083a3359/', label: 'LinkedIn' },
+    { icon: FaTwitter, href: 'https://x.com/elielfilho_dev', label: 'Twitter' }
+  ];
+
+  const features = [
+    { icon: HiCode, text: 'Desenvolvimento Full Stack' },
+    { icon: HiLightBulb, text: 'Soluções Inovadoras' },
+    { icon: FaRocket, text: 'Performance Otimizada' }
+  ];
+
   return (
-    <section id="hero" ref={heroRef} className={styles.heroSection}>
-      <div className={styles.heroContainer}>
-        <motion.div
-          className={styles.heroContent}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <motion.p
-            className={styles.greeting}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            👋 Olá, eu sou
-          </motion.p>
-          
-          <motion.h1
-            className={styles.title}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Eliel Filho
-          </motion.h1>
-          
-          <motion.h2
-            className={styles.subtitle}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-          >
-            Desenvolvedor Fullstack & Técnico em TI
-          </motion.h2>
-          
-          <motion.p
-            className={styles.description}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-          >
-            Especialista em desenvolvimento web moderno e soluções completas em TI. 
-            Transformo ideias em realidade através de código limpo e manutenção profissional.
-          </motion.p>
-          
+    <section id="home" className="hero">
+      <div className="hero-background">
+        <div className="hero-shapes">
           <motion.div
-            className={styles.techStack}
-            initial={{ opacity: 0, y: 20 }}
+            className="shape shape-1"
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 5, 0]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="shape shape-2"
+            animate={{
+              y: [0, 20, 0],
+              rotate: [0, -5, 0]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="shape shape-3"
+            animate={{
+              y: [0, -15, 0],
+              x: [0, 10, 0]
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="hero-content">
+          <motion.div
+            className="hero-text"
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {['React', 'Node.js', 'JavaScript', 'Python', 'HTML/CSS', 'SQL'].map((tech, index) => (
-              <motion.span
-                key={tech}
-                className={styles.techItem}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: 1.4 + index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
+            <motion.h1
+              className="hero-title"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Olá, eu sou <span className="text-gradient">Eliel Filho</span>
+            </motion.h1>
+
+            <motion.h2
+              className="hero-subtitle"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              Desenvolvedor Full Stack
+            </motion.h2>
+
+            <motion.p
+              className="hero-description"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              Especialista em criar soluções digitais inovadoras e performáticas. 
+              Transformo ideias em realidade através de código limpo e tecnologias modernas.
+            </motion.p>
+
+            <motion.div
+              className="hero-features"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              {features.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className="feature-item"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <feature.icon className="feature-icon" />
+                  <span>{feature.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <motion.button
+                className="btn btn-primary"
+                onClick={() => scrollToSection('#projects')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {tech}
-              </motion.span>
-            ))}
-          </motion.div>
-          
-          <motion.div
-            className={styles.ctaButtons}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.6 }}
-          >
-            <motion.a
-              href="#contact"
-              className={styles.primaryButton}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+                Ver Projetos
+              </motion.button>
+              
+              <motion.a
+                href="/cv.pdf"
+                download="Eliel_Filho_CV.pdf"
+                className="btn btn-secondary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaDownload />
+                Baixar CV
+              </motion.a>
+            </motion.div>
+
+            <motion.div
+              className="hero-social"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
             >
-              <FaWhatsapp />
-              Vamos Conversar
-            </motion.a>
-            <motion.a
-              href="#portfolio"
-              className={styles.secondaryButton}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaCode />
-              Ver Projetos
-            </motion.a>
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  whileHover={{ scale: 1.2, y: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={social.label}
+                >
+                  <social.icon />
+                </motion.a>
+              ))}
+            </motion.div>
           </motion.div>
-          
+
           <motion.div
-            className={styles.socialLinks}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.8 }}
-          >
-            <motion.a
-              href="https://github.com/elielfilhodev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaGithub />
-            </motion.a>
-            <motion.a
-              href="https://www.linkedin.com/in/eliel-filho-8083a3359"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaLinkedin />
-            </motion.a>
-            <motion.a
-              href="https://wa.me/5514999061535"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialLink}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <FaWhatsapp />
-            </motion.a>
-          </motion.div>
-        </motion.div>
-        
-        <motion.div
-          className={styles.heroVisual}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <motion.div
-            className={styles.floatingIcon}
-            animate={{ y: [-10, 10, -10] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            <FaCode />
-          </motion.div>
-          
-          <motion.div
-            className={styles.floatingIcon}
-            animate={{ y: [10, -10, 10] }}
-            transition={{ duration: 4, repeat: Infinity }}
-          >
-            <FaServer />
-          </motion.div>
-          
-          <motion.div
-            className={styles.floatingIcon}
-            animate={{ y: [-5, 15, -5] }}
-            transition={{ duration: 5, repeat: Infinity }}
-          >
-            <FaWrench />
-          </motion.div>
-          
-          <motion.div
-            className={styles.codeBlock}
+            className="hero-image"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className={styles.codeLine}>
-              <span className={styles.keyword}>const</span> <span className={styles.function}>eliel</span> = {'{'}
-            </div>
-            <div className={styles.codeLine}>
-              &nbsp;&nbsp;nome: <span className={styles.string}>'Eliel Filho'</span>,
-            </div>
-            <div className={styles.codeLine}>
-              &nbsp;&nbsp;profissao: <span className={styles.string}>'Fullstack Dev'</span>,
-            </div>
-            <div className={styles.codeLine}>
-              &nbsp;&nbsp;especialidade: <span className={styles.string}>'TI & Web Dev'</span>
-            </div>
-            <div className={styles.codeLine}>
-              {'};'}
-            </div>
-            <div className={`${styles.codeLine} ${styles.comment}`}>
+            <div className="image-container">
+              <motion.div
+                className="image-placeholder"
+                animate={{
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <div className="code-snippet">
+                  <div className="code-line">
+                    <span className="code-keyword">const</span> developer = {'{'}
+                  </div>
+                  <div className="code-line">
+                    &nbsp;&nbsp;name: <span className="code-string">'Eliel'</span>,
+                  </div>
+                  <div className="code-line">
+                    &nbsp;&nbsp;skills: [<span className="code-string">'React'</span>, <span className="code-string">'Node.js'</span>],
+                  </div>
+                  <div className="code-line">
+                    &nbsp;&nbsp;passion: <span className="code-string">'Coding'</span>
+                  </div>
+                  <div className="code-line">{'}'}</div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-      
-      <motion.div
-        className={styles.scrollIndicator}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 2.4 }}
-        onClick={handleScrollDown}
-      >
-        <span>Role para baixo</span>
-        <FaArrowDown className={styles.arrow} />
-      </motion.div>
     </section>
   );
 };

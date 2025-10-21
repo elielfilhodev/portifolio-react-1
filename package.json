@@ -1,16 +1,18 @@
 {
-  "name": "elielfilho-portfolio",
+  "name": "portfolio-react",
   "version": "1.0.0",
-  "description": "Portfolio profissional de Eliel Filho - Desenvolvedor Fullstack e Técnico em TI",
   "private": true,
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
-    "framer-motion": "^12.23.22",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
+    "react-icons": "^4.11.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^5.1.0"
+    "react-typed": "^2.0.12",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,14 +37,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "keywords": [
-    "portfolio",
-    "developer",
-    "fullstack",
-    "react",
-    "ti"
-  ],
-  "author": "Eliel Filho",
-  "license": "MIT"
+  }
 }

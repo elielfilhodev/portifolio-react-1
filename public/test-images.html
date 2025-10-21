@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Imagens</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .image-test { margin: 20px 0; }
+        img { max-width: 300px; border: 1px solid #ccc; margin: 10px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Teste de Imagens do Portfólio</h1>
+    
+    <div class="image-test">
+        <h3>Imagem 1: TLOU</h3>
+        <img src="/images/projects/tlou.png" alt="TLOU" onerror="this.style.border='2px solid red'; this.alt='ERRO: Imagem não encontrada';">
+        <p>Caminho: /images/projects/tlou.png</p>
+    </div>
+    
+    <div class="image-test">
+        <h3>Imagem 2: Eliel</h3>
+        <img src="/images/projects/eliel.png" alt="Eliel" onerror="this.style.border='2px solid red'; this.alt='ERRO: Imagem não encontrada';">
+        <p>Caminho: /images/projects/eliel.png</p>
+    </div>
+    
+    <div class="image-test">
+        <h3>Imagem 3: PetDev</h3>
+        <img src="/images/projects/petdev.png" alt="PetDev" onerror="this.style.border='2px solid red'; this.alt='ERRO: Imagem não encontrada';">
+        <p>Caminho: /images/projects/petdev.png</p>
+    </div>
+    
+    <div class="image-test">
+        <h3>Imagem 4: Adna</h3>
+        <img src="/images/projects/adna.png" alt="Adna" onerror="this.style.border='2px solid red'; this.alt='ERRO: Imagem não encontrada';">
+        <p>Caminho: /images/projects/adna.png</p>
+    </div>
+    
+    <script>
+        // Verificar se as imagens carregaram
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach((img, index) => {
+                img.onload = function() {
+                    console.log(`Imagem ${index + 1} carregada com sucesso:`, img.src);
+                };
+                img.onerror = function() {
+                    console.error(`Erro ao carregar imagem ${index + 1}:`, img.src);
+                };
+            });
+        });
+    </script>
+</body>
+</html>

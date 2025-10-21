@@ -1,121 +1,186 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaServer, FaWrench, FaShieldAlt } from 'react-icons/fa';
-import styles from './About.module.css';
+import { FaGraduationCap, FaCode, FaRocket, FaHeart } from 'react-icons/fa';
+import './About.css';
 
-const About = ({ onSectionChange }) => {
-  const aboutRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const aboutElement = aboutRef.current;
-      if (aboutElement) {
-        const rect = aboutElement.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
-          onSectionChange('about');
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [onSectionChange]);
-
-  const skills = [
+const About = () => {
+  const education = [
     {
-      icon: FaCode,
-      title: 'Desenvolvimento Frontend',
-      description: 'React, JavaScript, HTML/CSS, TypeScript, interfaces modernas e responsivas'
+      institution: 'ETEC - Taquarituba',
+      degree: 'Ensino Médio integrado com curso técnico em análise e desenvolvimento de sistemas',
+      period: '2019 - 2021',
+      description: 'Formação sólida em fundamentos da computação, desenvolvimento de aplicações web e análise de software.'
     },
     {
-      icon: FaServer,
-      title: 'Desenvolvimento Backend',
-      description: 'Node.js, Python, APIs REST, SQL, bancos de dados e arquitetura de sistemas'
-    },
-    {
-      icon: FaWrench,
-      title: 'Manutenção de Hardware',
-      description: 'Reparo de notebooks, upgrades, formatação e recuperação de dados'
-    },
-    {
-      icon: FaShieldAlt,
-      title: 'Segurança e Backup',
-      description: 'Proteção de dados, backup seguro e recuperação de sistemas'
+      institution: 'EBAC - Escola Britânica de Artes Criativas e Tecnologia',
+      degree: 'Full Stack Java',
+      period: '2024 - Atualmente',
+      description: 'Cursando Full Stack Java, React, Spring Boot, entre outras tecnologias e metodologias de desenvolvimento de software.'
     }
   ];
 
+  const achievements = [
+    {
+      icon: FaCode,
+      title: '5+ Anos',
+      description: 'Experiência em desenvolvimento'
+    },
+    {
+      icon: FaRocket,
+      title: '5+ Projetos',
+      description: 'Entregues com sucesso'
+    },
+    {
+      icon: FaHeart,
+      title: '100%',
+      description: 'Satisfação dos clientes'
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
   return (
-    <section id="about" ref={aboutRef} className={styles.aboutSection}>
-      <div className={styles.container}>
+    <section id="about" className="about section">
+      <div className="container">
         <motion.div
-          className={styles.sectionHeader}
-          initial={{ opacity: 0, y: 50 }}
+          className="section-header"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className={styles.sectionTitle}>Sobre Mim</h2>
-          <p className={styles.sectionSubtitle}>
-            Conheça minha jornada como desenvolvedor e técnico em TI
+          <h2 className="section-title">Sobre Mim</h2>
+          <p className="section-subtitle">
+            Conheça um pouco da minha jornada e paixão pela tecnologia
           </p>
         </motion.div>
 
-        <div className={styles.aboutContent}>
+        <div className="about-content">
           <motion.div
-            className={styles.aboutText}
+            className="about-text"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>Minha História</h3>
-            <p>
-              Sou Eliel Filho, um apaixonado por tecnologia com mais de 3 anos de experiência 
-              em desenvolvimento web e serviços de TI. Minha jornada começou com a curiosidade 
-              de entender como as coisas funcionam por trás das telas.
-            </p>
-            <p>
-              Como desenvolvedor fullstack, crio soluções web modernas e eficientes, sempre 
-              buscando as melhores práticas e tecnologias mais recentes. Como técnico em TI, 
-              ofereço serviços completos de manutenção e reparo de equipamentos.
-            </p>
-            <p>
-              Meu objetivo é sempre entregar qualidade, inovação e confiabilidade em cada 
-              projeto, seja desenvolvendo uma aplicação web ou resolvendo problemas técnicos.
-            </p>
-            
-            <div className={styles.statsGrid}>
-              <div className={styles.statItem}>
-                <span className={styles.number}>10+</span>
-                <span className={styles.label}>Projetos Concluídos</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.number}>3+</span>
-                <span className={styles.label}>Anos de Experiência</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+            <motion.h3
+              className="about-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Desenvolvedor apaixonado por criar soluções inovadoras
+            </motion.h3>
 
-        <div className={styles.skillsGrid}>
-          {skills.map((skill, index) => {
-            const Icon = skill.icon;
-            return (
-              <motion.div
-                key={index}
-                className={styles.skillCard}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
-                <Icon className={styles.icon} />
-                <h4>{skill.title}</h4>
-                <p>{skill.description}</p>
-              </motion.div>
-            );
-          })}
+            <motion.p
+              className="about-description"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Sou um desenvolvedor full stack com mais de 5 anos de experiência, 
+              especializado em criar aplicações web modernas e performáticas. 
+              Minha paixão está em transformar ideias complexas em soluções elegantes 
+              e funcionais que fazem a diferença na vida das pessoas.
+            </motion.p>
+
+            <motion.p
+              className="about-description"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              Trabalho principalmente com React, Node.js, TypeScript e bancos de dados modernos. 
+              Sempre busco aprender novas tecnologias e aplicar as melhores práticas de desenvolvimento 
+              para entregar produtos de alta qualidade.
+            </motion.p>
+
+            <motion.div
+              className="about-achievements"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {achievements.map((achievement, index) => (
+                <motion.div
+                  key={index}
+                  className="achievement-item"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <achievement.icon className="achievement-icon" />
+                  <div className="achievement-content">
+                    <h4 className="achievement-title">{achievement.title}</h4>
+                    <p className="achievement-description">{achievement.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="about-education"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <motion.h3
+              className="education-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <FaGraduationCap className="title-icon" />
+              Formação Acadêmica
+            </motion.h3>
+
+            <motion.div
+              className="education-timeline"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {education.map((edu, index) => (
+                <motion.div
+                  key={index}
+                  className="education-item"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <div className="education-period">{edu.period}</div>
+                  <div className="education-content">
+                    <h4 className="education-degree">{edu.degree}</h4>
+                    <p className="education-institution">{edu.institution}</p>
+                    <p className="education-description">{edu.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

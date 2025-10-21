@@ -3,51 +3,69 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import styles from './components/App.module.css';
-
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('hero');
+  const [theme, setTheme] = useState('light');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleSectionChange = (section) => {
-    setActiveSection(section);
+  useEffect(() => {
+    // Simular carregamento inicial
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  return (
-    <div className={styles.appContainer}>
-      <div className={styles.backgroundElements}>
-        <div className={styles.gridPattern} />
-        <div className={styles.floatingOrb} />
-        <div className={styles.floatingOrb} />
-        <div className={styles.floatingOrb} />
-      </div>
-      
-      <AnimatePresence mode="wait">
+  if (isLoading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #6366f1, #f59e0b)'
+      }}>
         <motion.div
-          key="main-content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className={styles.mainContent}
-        >
-          <Header activeSection={activeSection} onSectionChange={handleSectionChange} />
-          
-          <main>
-            <Hero onSectionChange={handleSectionChange} />
-            <About onSectionChange={handleSectionChange} />
-            <Services onSectionChange={handleSectionChange} />
-            <Portfolio onSectionChange={handleSectionChange} />
-            <Contact onSectionChange={handleSectionChange} />
-          </main>
-          
-          <Footer />
-        </motion.div>
-      </AnimatePresence>
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          style={{
+            width: '50px',
+            height: '50px',
+            border: '3px solid rgba(255,255,255,0.3)',
+            borderTop: '3px solid white',
+            borderRadius: '50%'
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      <Header theme={theme} toggleTheme={toggleTheme} />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
+      <ScrollToTop />
     </div>
   );
 }

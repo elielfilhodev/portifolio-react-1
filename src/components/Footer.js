@@ -1,139 +1,130 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaGithub, FaLinkedin, FaWhatsapp, FaArrowUp } from 'react-icons/fa';
-import styles from './Footer.module.css';
+import { FaGithub, FaLinkedin, FaTwitter, FaHeart, FaCode } from 'react-icons/fa';
+import './Footer.css';
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
+  const currentYear = new Date().getFullYear();
+
+  const socialLinks = [
+    { icon: FaGithub, href: 'https://github.com/elielfilhodev', label: 'GitHub' },
+    { icon: FaLinkedin, href: 'https://www.linkedin.com/in/eliel-filho-8083a3359/', label: 'LinkedIn' },
+    { icon: FaTwitter, href: 'https://x.com/elielfilho_dev', label: 'Twitter' }
+  ];
 
   const quickLinks = [
-    { name: 'Início', href: '#hero' },
+    { name: 'Início', href: '#home' },
     { name: 'Sobre', href: '#about' },
-    { name: 'Serviços', href: '#services' },
-    { name: 'Portfólio', href: '#portfolio' },
+    { name: 'Habilidades', href: '#skills' },
+    { name: 'Projetos', href: '#projects' },
     { name: 'Contato', href: '#contact' }
   ];
 
-  const services = [
-    'Desenvolvimento Web',
-    'Desenvolvimento Mobile',
-    'Manutenção de Notebooks',
-    'Upgrades de Hardware',
-    'Recuperação de Dados'
-  ];
-
-  const technologies = ['React', 'Node.js', 'JavaScript', 'Python'];
+  const scrollToSection = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <footer className={styles.footerContainer}>
-      <motion.button
-        className={styles.backToTop}
-        onClick={scrollToTop}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <FaArrowUp />
-      </motion.button>
-
-      <div className={styles.container}>
-        <div className={styles.footerContent}>
-          <div className={styles.footerSection}>
-            <h3 className={styles.logo}>
-              <FaCode />
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
+          <motion.div
+            className="footer-brand"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="footer-logo">
+              <FaCode className="logo-icon" />
               Eliel Filho
             </h3>
-            <p>
-              Desenvolvedor Fullstack e Técnico em TI com paixão por criar 
-              soluções inovadoras e resolver problemas tecnológicos.
+            <p className="footer-description">
+              Desenvolvedor Full Stack apaixonado por criar soluções inovadoras 
+              e transformar ideias em realidade através do código.
             </p>
-            <p>
-              Transformando ideias em realidade através de código limpo 
-              e serviços de TI profissionais.
-            </p>
-          </div>
-
-          <div className={styles.footerSection}>
-            <h3>Links Rápidos</h3>
-            <div className={styles.quickLinks}>
-              {quickLinks.map((link, index) => (
-                <a key={index} href={link.href}>
-                  {link.name}
-                </a>
+            <div className="footer-social">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  whileHover={{ scale: 1.2, y: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={social.label}
+                >
+                  <social.icon />
+                </motion.a>
               ))}
             </div>
-            
-            <h3>Serviços</h3>
-            <ul>
-              {services.map((service, index) => (
-                <li key={index}>{service}</li>
+          </motion.div>
+
+          <motion.div
+            className="footer-links"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="footer-title">Links Rápidos</h4>
+            <ul className="footer-list">
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                    className="footer-link"
+                  >
+                    {link.name}
+                  </a>
+                </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div className={styles.footerSection}>
-            <h3>Redes Sociais</h3>
-            <div className={styles.socialLinks}>
-              <a
-                href="https://github.com/elielfilhodev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
-                <FaGithub />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/eliel-filho-8083a3359"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href="https://wa.me/5514999061535"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-              >
-                <FaWhatsapp />
-              </a>
-            </div>
-            
-            <div className={styles.contactInfo}>
-              <p className={styles.contactTitle}>
-                Entre em contato:
+          <motion.div
+            className="footer-contact"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h4 className="footer-title">Contato</h4>
+            <div className="contact-info">
+              <p className="contact-item">
+                <strong>Email:</strong> elielfilhodev@hotmail.com
               </p>
-              <p>
-                <a href="mailto:elielfilhodev@hotmail.com">
-                  elielfilhodev@hotmail.com
-                </a>
+              <p className="contact-item">
+                <strong>Telefone:</strong> +55 (14) 99906-1535
               </p>
-              <p>
-                <a href="https://wa.me/5514999061535">
-                  +55 14 99906-1535
-                </a>
+              <p className="contact-item">
+                <strong>Localização:</strong> Taquarituba, SP - Brasil
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className={styles.footerBottom}>
-          <p className={styles.copyright}>
-            © 2024 Eliel Filho. Todos os direitos reservados.
-          </p>
-          
-          <div className={styles.techStack}>
-            <span>Desenvolvido com:</span>
-            {technologies.map((tech, index) => (
-              <span key={index} className={styles.techItem}>{tech}</span>
-            ))}
+        <motion.div
+          className="footer-bottom"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          <div className="footer-bottom-content">
+            <p className="footer-copyright">
+              © {currentYear} Eliel Filho. Todos os direitos reservados.
+            </p>
+            <p className="footer-made">
+              Feito com <FaHeart className="heart-icon" /> por Eliel Filho
+            </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
